@@ -7,7 +7,7 @@ import sys
 import logging
 from datetime import datetime
 
-# Instrumentation Key 3557fa95-8e9c-4884-a5d6-e9a807b8a408
+# Instrumentation Key a06e5f79-b11b-4f9e-9fa1-b30c6e7a05d3
 # App Insights
 # TODO: Import required libraries for App Insights
 from opencensus.ext.azure.log_exporter import AzureLogHandler
@@ -34,11 +34,11 @@ config_integration.trace_integrations(['logging'])
 config_integration.trace_integrations(['requests'])
 # Standard Logging
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=3557fa95-8e9c-4884-a5d6-e9a807b8a408')
+handler = AzureLogHandler(connection_string='InstrumentationKey=a06e5f79-b11b-4f9e-9fa1-b30c6e7a05d3')
 handler.setFormatter(logging.Formatter('%(traceId)s %(spanId)s %(message)s'))
 logger.addHandler(handler)
 # Logging custom Events 
-logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=3557fa95-8e9c-4884-a5d6-e9a807b8a408'))
+logger.addHandler(AzureEventHandler(connection_string='InstrumentationKey=a06e5f79-b11b-4f9e-9fa1-b30c6e7a05d3'))
 # Set the logging level
 logger.setLevel(logging.INFO)
 
@@ -46,7 +46,7 @@ logger.setLevel(logging.INFO)
 # exporter = # TODO: Setup exporter
 exporter = metrics_exporter.new_metrics_exporter(
 enable_standard_metrics=True,
-connection_string='InstrumentationKey=3557fa95-8e9c-4884-a5d6-e9a807b8a408')
+connection_string='InstrumentationKey=a06e5f79-b11b-4f9e-9fa1-b30c6e7a05d3')
 view_manager.register_exporter(exporter)
 
 
@@ -54,7 +54,7 @@ view_manager.register_exporter(exporter)
 # tracer = # TODO: Setup tracer
 tracer = Tracer(
  exporter=AzureExporter(
-     connection_string='InstrumentationKey=3557fa95-8e9c-4884-a5d6-e9a807b8a408'),
+     connection_string='InstrumentationKey=a06e5f79-b11b-4f9e-9fa1-b30c6e7a05d3'),
  sampler=ProbabilitySampler(1.0),
 )
 
@@ -64,7 +64,7 @@ app = Flask(__name__)
 # middleware = # TODO: Setup flask middleware
 middleware = FlaskMiddleware(
  app,
- exporter=AzureExporter(connection_string="InstrumentationKey=3557fa95-8e9c-4884-a5d6-e9a807b8a408"),
+ exporter=AzureExporter(connection_string="InstrumentationKey=a06e5f79-b11b-4f9e-9fa1-b30c6e7a05d3"),
  sampler=ProbabilitySampler(rate=1.0)
 )
 
@@ -158,4 +158,4 @@ if __name__ == "__main__":
     # comment line below when deploying to VMSS
     app.run() # local
     # uncomment the line below before deployment to VMSS
-     app.run(host='0.0.0.0', threaded=True, debug=True) # remote
+    app.run(host='0.0.0.0', threaded=True, debug=True) #remote
